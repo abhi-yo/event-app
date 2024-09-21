@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import EventMap from "@/components/EventMap";
 import EventList from "@/components/EventList";
 import EventForm from "@/components/EventForm";
-import LandingPage from "@/components/LandingPage";
-import { Button } from "@/components/ui/button";
 
-export default function Home() {
-  const [showLanding, setShowLanding] = useState(true);
+export default function EventsPage() {
   const [events, setEvents] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState({
     lat: null,
@@ -26,20 +24,13 @@ export default function Home() {
     setSelectedLocation({ lat, lng });
   };
 
-  if (showLanding) {
-    return <LandingPage onGetStarted={() => setShowLanding(false)} />;
-  }
-
   return (
     <main className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-3xl font-bold">Hyper-Local Event Discovery</h1>
-        <Button
-          onClick={() => setShowLanding(true)}
-          className="text-blue-500 hover:underline"
-        >
+        <Link href="/" className="text-blue-500 hover:underline">
           Back to Home
-        </Button>
+        </Link>
       </div>
       <div className="mb-4">
         <EventMap events={events} onLocationSelect={handleLocationSelect} />
